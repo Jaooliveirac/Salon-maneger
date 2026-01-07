@@ -106,7 +106,7 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
           <div className="mb-10">
             {mode === 'login' && (
               <>
-                <h3 className="text-3xl font-serif font-bold text-slate-800 mb-2">Bem-vindo de volta</h3>
+                <h3 className="text-3xl font-serif font-bold text-slate-800 mb-2">Bem-vindo</h3>
                 <p className="text-slate-400">Entre com suas credenciais para gerenciar seu salão.</p>
               </>
             )}

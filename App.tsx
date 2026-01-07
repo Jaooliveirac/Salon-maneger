@@ -98,8 +98,12 @@ const App: React.FC = () => {
   }, [appointments, currentTime]);
 
   const handleLogout = () => {
-    if (confirm('Tem certeza que deseja sair?')) {
+    if (confirm('Deseja realmente sair do sistema?')) {
+      localStorage.removeItem('glamour_session');
       setCurrentUser(null);
+      setActiveView('dashboard');
+      setIsSidebarOpen(false);
+      setIsNotifOpen(false);
     }
   };
 
@@ -119,7 +123,7 @@ const App: React.FC = () => {
     </button>
   );
 
-  // Auth Guard
+  // Auth Guard: If no user, show the Login/Signup screen
   if (!currentUser) {
     return <Auth onLogin={setCurrentUser} />;
   }
@@ -191,10 +195,10 @@ const App: React.FC = () => {
         <div className="pt-6 border-t border-slate-100">
            <button 
             onClick={handleLogout}
-            className="flex items-center space-x-3 w-full px-4 py-3 text-slate-500 font-medium"
+            className="flex items-center space-x-3 w-full px-4 py-3 text-slate-500 font-medium hover:text-red-500 transition-colors"
           >
-            <LogOut size={20} />
-            <span>Sair</span>
+            <LogOut size={20} className="mr-3" />
+            <span>Sair do Sistema</span>
           </button>
         </div>
       </aside>
