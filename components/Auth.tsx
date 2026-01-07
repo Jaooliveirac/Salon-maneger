@@ -93,12 +93,8 @@ const Auth: React.FC<AuthProps> = ({ onLogin }) => {
             <p className="text-rose-100 text-lg">Gerencie agendamentos, clientes e finanças em uma única plataforma elegante e intuitiva.</p>
           </div>
 
-          <div className="flex items-center space-x-4">
-             <div className="flex -space-x-3">
-               {[1,2,3].map(i => <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} className="w-10 h-10 rounded-full border-2 border-rose-500" alt="User" />)}
-             </div>
-             <p className="text-sm text-rose-100 font-medium">+ de 500 profissionais já usam</p>
-          </div>
+          {/* User social proof removed per request */}
+          <div></div>
         </div>
 
         {/* Right Side: Forms */}
