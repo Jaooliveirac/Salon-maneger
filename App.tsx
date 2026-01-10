@@ -43,18 +43,19 @@ const App: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
-  // Carregar dados iniciais do localStorage
+  // Carregar dados iniciais do usuário logado
   useEffect(() => {
     if (currentUser) {
       const localData = db.getLocalData();
       setClients(localData.clients);
       setStaff(localData.staff);
+      // Carrega serviços salvos ou os iniciais se for a primeira vez
       setServices(localData.services.length > 0 ? localData.services : INITIAL_SERVICES);
       setAppointments(localData.appointments);
     }
   }, [currentUser]);
 
-  // Salvar automaticamente no localStorage quando houver mudanças
+  // Salvar automaticamente no banco individual do usuário quando houver mudanças
   useEffect(() => { if (currentUser) db.saveData('clients', clients); }, [clients, currentUser]);
   useEffect(() => { if (currentUser) db.saveData('staff', staff); }, [staff, currentUser]);
   useEffect(() => { if (currentUser) db.saveData('services', services); }, [services, currentUser]);
@@ -66,7 +67,7 @@ const App: React.FC = () => {
   }, [isDarkMode]);
 
   const handleLogout = () => {
-    if (confirm('Deseja realmente sair?')) {
+    if (confirm('Deseja realmente sair? Seus dados continuarão salvos com segurança.')) {
       db.setSession(null);
       setCurrentUser(null);
       setActiveView('dashboard');
@@ -74,7 +75,7 @@ const App: React.FC = () => {
   };
 
   if (!currentUser) {
-    return <Auth onLogin={(user) => { db.setSession(user); setCurrentUser(user); }} />;
+    return <Auth onLogin={(user) => setCurrentUser(user)} />;
   }
 
   return (
